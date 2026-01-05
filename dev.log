@@ -1,0 +1,97 @@
+
+> squeegeerun@0.1.0 dev
+> next dev
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/jonathandoran/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/jonathandoran/Desktop/SqueegeRun/squeegeerun/package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.40.94:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 2s
+ GET /customers 200 in 3.9s (compile: 2.5s, proxy.ts: 417ms, render: 1046ms)
+ GET /customers/cbd92f71-17d5-4ec6-971e-538f6b622ac5 200 in 1906ms (compile: 976ms, proxy.ts: 131ms, render: 800ms)
+ POST /customers/cbd92f71-17d5-4ec6-971e-538f6b622ac5 200 in 1351ms (compile: 12ms, proxy.ts: 190ms, render: 1149ms)
+ GET /customers 200 in 1156ms (compile: 23ms, proxy.ts: 514ms, render: 619ms)
+ GET /dashboard 200 in 279ms (compile: 125ms, proxy.ts: 131ms, render: 23ms)
+ GET /customers 200 in 3.0s (compile: 154ms, proxy.ts: 970ms, render: 1894ms)
+ GET /customers/cbd92f71-17d5-4ec6-971e-538f6b622ac5 200 in 1908ms (compile: 208ms, proxy.ts: 414ms, render: 1285ms)
+ GET /customers 200 in 1299ms (compile: 25ms, proxy.ts: 427ms, render: 847ms)
+ GET /customers/cbd92f71-17d5-4ec6-971e-538f6b622ac5 200 in 1305ms (compile: 70ms, proxy.ts: 259ms, render: 976ms)
+ GET /jobs 200 in 1417ms (compile: 692ms, proxy.ts: 633ms, render: 92ms)
+ GET /customers 200 in 742ms (compile: 9ms, proxy.ts: 149ms, render: 584ms)
+ GET /dashboard 200 in 288ms (compile: 9ms, proxy.ts: 266ms, render: 12ms)
+ GET /settings 404 in 374ms (compile: 170ms, proxy.ts: 189ms, render: 16ms)
+ GET /settings 404 in 180ms (compile: 9ms, proxy.ts: 122ms, render: 49ms)
+✓ Compiled in 2.2s
+ GET /settings 404 in 1370ms (compile: 78ms, proxy.ts: 1222ms, render: 70ms)
+ GET /settings 404 in 176ms (compile: 5ms, proxy.ts: 157ms, render: 14ms)
+ GET /settings 404 in 148ms (compile: 4ms, proxy.ts: 127ms, render: 17ms)
+ GET /settings 404 in 143ms (compile: 3ms, proxy.ts: 128ms, render: 12ms)
+ GET /settings 404 in 269ms (compile: 9ms, proxy.ts: 211ms, render: 49ms)
+ GET /settings 404 in 179ms (compile: 3ms, proxy.ts: 161ms, render: 15ms)
+ GET /settings 404 in 161ms (compile: 4ms, proxy.ts: 144ms, render: 12ms)
+ GET /settings 404 in 514ms (compile: 93ms, proxy.ts: 362ms, render: 59ms)
+ GET /settings 404 in 198ms (compile: 4ms, proxy.ts: 150ms, render: 44ms)
+✓ Compiled in 351ms
+✓ Compiled in 921ms
+ GET /customers 200 in 4.3s (compile: 613ms, proxy.ts: 1597ms, render: 2.1s)
+ GET /jobs 200 in 417ms (compile: 86ms, proxy.ts: 225ms, render: 105ms)
+ GET /routes 404 in 250ms (compile: 81ms, proxy.ts: 152ms, render: 17ms)
+ GET /routes 404 in 161ms (compile: 4ms, proxy.ts: 124ms, render: 33ms)
+ GET /jobs 200 in 561ms (compile: 37ms, proxy.ts: 345ms, render: 179ms)
+ GET /jobs 200 in 1046ms (compile: 41ms, proxy.ts: 872ms, render: 133ms)
+⨯ Error: ENOENT: no such file or directory, open '/Users/jonathandoran/Desktop/SqueegeRun/squeegeerun/.next/dev/server/app/(dashboard)/jobs/page/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/jonathandoran/Desktop/SqueegeRun/squeegeerun/.next/dev/server/app/(dashboard)/jobs/page/build-manifest.json'
+}
+
+thread 'tokio-runtime-worker' (308635162) panicked at /Users/geist/dev/actions-runner/_work/next.js/next.js/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Meta for PagesProject::client_module_context (TaskId 251690))
+
+Caused by:
+    0: Looking up data for TaskId 251690 from database failed
+    1: Unable to open static sorted file referenced from 00000350.meta
+    2: Unable to open static sorted file 00000342.sst
+    3: No such file or directory (os error 2)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'tokio-runtime-worker' (308635166) panicked at /Users/geist/dev/actions-runner/_work/next.js/next.js/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Meta for PagesProject::client_module_context (TaskId 251690))
+
+Caused by:
+    0: Looking up data for TaskId 251690 from database failed
+    1: Unable to open static sorted file referenced from 00000350.meta
+    2: Unable to open static sorted file 00000342.sst
+    3: No such file or directory (os error 2)
+
+thread 'tokio-runtime-worker' (308635162) panicked at /Users/geist/dev/actions-runner/_work/next.js/next.js/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Meta for PagesProject::client_module_context (TaskId 251690))
+
+Caused by:
+    0: Looking up data for TaskId 251690 from database failed
+    1: Unable to open static sorted file referenced from 00000350.meta
+    2: Unable to open static sorted file 00000342.sst
+    3: No such file or directory (os error 2)
+
+thread 'tokio-runtime-worker' (308635166) panicked at /Users/geist/dev/actions-runner/_work/next.js/next.js/turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Meta for PagesProject::client_module_context (TaskId 251690))
+
+Caused by:
+    0: Looking up data for TaskId 251690 from database failed
+    1: Unable to open static sorted file referenced from 00000350.meta
+    2: Unable to open static sorted file 00000342.sst
+    3: No such file or directory (os error 2)
+○ Compiling /_error ...
+[?25h
