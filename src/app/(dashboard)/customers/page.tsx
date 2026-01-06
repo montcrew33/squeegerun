@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { Plus, Search } from "lucide-react"
+import { Plus, Search, Upload } from "lucide-react"
 import { getCustomers } from "@/services/customers"
 import { CustomersTable } from "@/components/tables/customers-table"
 import { Button } from "@/components/ui/button"
@@ -62,12 +62,20 @@ export default async function CustomersPage({ searchParams }: CustomersPageProps
             Manage your customer database and track their service addresses
           </p>
         </div>
-        <Button asChild>
-          <Link href="/customers/new">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Customer
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button asChild variant="outline">
+            <Link href="/customers/import">
+              <Upload className="h-4 w-4 mr-2" />
+              Import CSV
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/customers/new">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Customer
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <Card>
