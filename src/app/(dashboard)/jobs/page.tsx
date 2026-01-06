@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { Plus, Calendar, Briefcase } from "lucide-react"
+import { Plus, Calendar, Briefcase, CloudRain } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -109,12 +109,24 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
             Manage and schedule window cleaning appointments
           </p>
         </div>
-        <Button asChild>
-          <Link href="/jobs/new">
-            <Plus className="h-4 w-4 mr-2" />
-            Schedule Job
-          </Link>
-        </Button>
+        <div className="flex gap-3">
+          <Button 
+            asChild 
+            variant="outline"
+            className="bg-orange-500 text-white border-orange-500 hover:bg-orange-600 hover:border-orange-600"
+          >
+            <Link href="/jobs/tools/rain-mode" title="Reschedule & notify customers for weather delays">
+              <CloudRain className="h-4 w-4 mr-2" />
+              ☁️ Rain Mode
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/jobs/new">
+              <Plus className="h-4 w-4 mr-2" />
+              Schedule Job
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Search and Filters */}

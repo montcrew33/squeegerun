@@ -13,13 +13,9 @@ export function formatCurrency(amount: number) {
 }
 
 export function formatDate(date: Date | string) {
-  const dateObj = typeof date === 'string' ? new Date(date) : date
-  return new Intl.DateTimeFormat('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: '2-digit',
-    year: 'numeric',
-  }).format(dateObj)
+  // Use the centralized date utilities
+  const { formatDate: centralizedFormatDate } = require('./date-utils')
+  return centralizedFormatDate(date, 'EEE, MMM dd, yyyy')
 }
 
 export function formatPhoneNumber(phone: string) {

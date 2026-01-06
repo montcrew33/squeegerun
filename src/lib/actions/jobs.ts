@@ -4,12 +4,33 @@ import { revalidatePath } from "next/cache"
 import { createJob, updateJob, updateJobStatus, deleteJob } from "@/services/jobs"
 import type { JobFormData } from "@/lib/validations/job"
 
+// Helper function to ensure date is stored correctly regardless of timezone
+function normalizeDate(dateString: string): string {
+  // If the date is already in YYYY-MM-DD format, just return it
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    return dateString
+  }
+  
+  // For other formats, parse carefully to avoid timezone issues
+  // Create date in local timezone and format manually
+  const date = new Date(dateString + 'T12:00:00') // Add noon to avoid DST issues
+  
+  // Get the year, month, day in local timezone
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  
+  return `${year}-${month}-${day}`
+}
+
 export async function createJobAction(data: JobFormData) {
   try {
+    const normalizedDate = normalizeDate(data.scheduled_date)
+    
     const job = await createJob({
       customer_id: data.customer_id,
       service_address_id: data.service_address_id,
-      scheduled_date: data.scheduled_date,
+      scheduled_date: normalizedDate,
       scheduled_time_start: data.scheduled_time_start || null,
       scheduled_time_end: data.scheduled_time_end || null,
       price_cents: typeof data.price === 'number' ? Math.round(data.price * 100) : null,
@@ -31,10 +52,12 @@ export async function createJobAction(data: JobFormData) {
 
 export async function updateJobAction(id: string, data: JobFormData) {
   try {
+    const normalizedDate = normalizeDate(data.scheduled_date)
+    
     const job = await updateJob(id, {
       customer_id: data.customer_id,
       service_address_id: data.service_address_id,
-      scheduled_date: data.scheduled_date,
+      scheduled_date: normalizedDate,
       scheduled_time_start: data.scheduled_time_start || null,
       scheduled_time_end: data.scheduled_time_end || null,
       price_cents: typeof data.price === 'number' ? Math.round(data.price * 100) : null,

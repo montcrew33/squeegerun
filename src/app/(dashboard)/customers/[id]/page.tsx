@@ -49,7 +49,7 @@ export default async function CustomerDetailPage({ params }: CustomerDetailPageP
           <div>
             <h1 className="text-3xl font-bold tracking-tight">{customer.name}</h1>
             <div className="flex items-center gap-2 mt-1">
-              <Badge variant={getStatusBadgeVariant(customer.status)}>
+              <Badge variant={getStatusBadgeVariant(customer.status || null)}>
                 {customer.status || 'Unknown'}
               </Badge>
               {customer.source && (

@@ -25,3 +25,64 @@
  GET /customers/import 200 in 852ms (compile: 693ms, proxy.ts: 138ms, render: 20ms)
  POST /customers/import 200 in 4.0s (compile: 34ms, proxy.ts: 511ms, render: 3.5s)
  GET /customers 200 in 612ms (compile: 16ms, proxy.ts: 143ms, render: 453ms)
+ GET /customers 200 in 1608ms (compile: 22ms, proxy.ts: 737ms, render: 848ms)
+ GET /jobs 200 in 1125ms (compile: 238ms, proxy.ts: 215ms, render: 672ms)
+ GET /customers 200 in 730ms (compile: 25ms, proxy.ts: 208ms, render: 497ms)
+ GET /customers/48af44a1-b803-428e-af1d-8a05d355a917 200 in 3.1s (compile: 1626ms, proxy.ts: 147ms, render: 1312ms)
+ GET /dashboard 200 in 2.3s (compile: 62ms, proxy.ts: 987ms, render: 1274ms)
+ GET /jobs/new 200 in 2.4s (compile: 1547ms, proxy.ts: 249ms, render: 618ms)
+ GET /jobs 200 in 820ms (compile: 15ms, proxy.ts: 205ms, render: 600ms)
+ GET /customers 200 in 600ms (compile: 11ms, proxy.ts: 130ms, render: 459ms)
+ GET /routes 404 in 1748ms (compile: 1508ms, proxy.ts: 209ms, render: 31ms)
+ GET /routes 404 in 193ms (compile: 3ms, proxy.ts: 144ms, render: 45ms)
+ GET /customers 200 in 911ms (compile: 19ms, proxy.ts: 192ms, render: 700ms)
+ GET /dashboard 200 in 1069ms (compile: 12ms, proxy.ts: 224ms, render: 833ms)
+ GET /dashboard 200 in 1908ms (compile: 43ms, proxy.ts: 656ms, render: 1210ms)
+ GET /customers 200 in 737ms (compile: 11ms, proxy.ts: 232ms, render: 493ms)
+ GET /jobs 200 in 828ms (compile: 22ms, proxy.ts: 201ms, render: 606ms)
+ GET /jobs?view=cards 200 in 722ms (compile: 8ms, proxy.ts: 203ms, render: 512ms)
+ GET /jobs?view=cards 200 in 712ms (compile: 6ms, proxy.ts: 215ms, render: 491ms)
+ GET /customers 200 in 624ms (compile: 5ms, proxy.ts: 137ms, render: 482ms)
+ GET /dashboard 200 in 1567ms (compile: 60ms, proxy.ts: 543ms, render: 964ms)
+ GET /settings 404 in 442ms (compile: 38ms, proxy.ts: 368ms, render: 37ms)
+ GET /settings 404 in 368ms (compile: 28ms, proxy.ts: 149ms, render: 191ms)
+ GET /dashboard 200 in 1174ms (compile: 12ms, proxy.ts: 167ms, render: 995ms)
+ GET /settings 404 in 220ms (compile: 17ms, proxy.ts: 166ms, render: 36ms)
+ GET /settings 404 in 172ms (compile: 5ms, proxy.ts: 123ms, render: 43ms)
+ GET /dashboard 200 in 1616ms (compile: 25ms, proxy.ts: 147ms, render: 1445ms)
+Error fetching job: Error: Failed to fetch job: invalid input syntax for type uuid: "rain-mode-test"
+    at getJob (src/services/jobs.ts:117:11)
+    at async JobDetailPage (src/app/(dashboard)/jobs/[id]/page.tsx:29:17)
+  115 |
+  116 |   if (error) {
+> 117 |     throw new Error(`Failed to fetch job: ${error.message}`)
+      |           ^
+  118 |   }
+  119 |
+  120 |   return job
+ GET /jobs/rain-mode-test 404 in 2.4s (compile: 1538ms, proxy.ts: 292ms, render: 612ms)
+Error fetching job: Error: Failed to fetch job: invalid input syntax for type uuid: "rain-mode"
+    at getJob (src/services/jobs.ts:117:11)
+    at async JobDetailPage (src/app/(dashboard)/jobs/[id]/page.tsx:29:17)
+  115 |
+  116 |   if (error) {
+> 117 |     throw new Error(`Failed to fetch job: ${error.message}`)
+      |           ^
+  118 |   }
+  119 |
+  120 |   return job
+ GET /jobs/rain-mode 404 in 2.5s (compile: 258ms, proxy.ts: 960ms, render: 1268ms)
+Error fetching job: Error: Failed to fetch job: invalid input syntax for type uuid: "rain-mode"
+    at getJob (src/services/jobs.ts:117:11)
+    at async JobDetailPage (src/app/(dashboard)/jobs/[id]/page.tsx:29:17)
+  115 |
+  116 |   if (error) {
+> 117 |     throw new Error(`Failed to fetch job: ${error.message}`)
+      |           ^
+  118 |   }
+  119 |
+  120 |   return job
+ GET /jobs/rain-mode 404 in 1240ms (compile: 46ms, proxy.ts: 449ms, render: 744ms)
+ GET /jobs/tools/rain-mode 404 in 944ms (compile: 95ms, proxy.ts: 627ms, render: 221ms)
+ GET /jobs/tools/rain-mode 404 in 225ms (compile: 22ms, proxy.ts: 158ms, render: 45ms)
+[?25h

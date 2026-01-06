@@ -3,7 +3,7 @@ import type { Database } from '@/types/database.types'
 
 type User = Database['public']['Tables']['profiles']['Row']
 
-async function getUserOrganizationId(): Promise<string> {
+export async function getUserOrganizationId(): Promise<string> {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   

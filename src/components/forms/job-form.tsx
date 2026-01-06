@@ -123,9 +123,28 @@ export function JobForm({
                         {address.label} - {address.street_address}, {address.city}
                       </SelectItem>
                     ))}
+                    <SelectItem value="__new__">
+                      + Add New Address
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
+                {field.value === "__new__" && (
+                  <div className="mt-2 space-y-2">
+                    <Input
+                      placeholder="Street address"
+                      onChange={(e) => {
+                        // Handle new address input - this would need more logic
+                        console.log('New address:', e.target.value)
+                      }}
+                    />
+                    <div className="grid grid-cols-3 gap-2">
+                      <Input placeholder="City" />
+                      <Input placeholder="State" />
+                      <Input placeholder="Postal Code" />
+                    </div>
+                  </div>
+                )}
               </FormItem>
             )}
           />

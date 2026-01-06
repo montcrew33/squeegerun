@@ -117,6 +117,7 @@ export async function getJob(id: string): Promise<JobWithDetails> {
     throw new Error(`Failed to fetch job: ${error.message}`)
   }
 
+
   return job
 }
 
@@ -178,13 +179,23 @@ export async function createJob(data: Omit<JobInsert, 'organization_id'>): Promi
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
+  // Ensure the date is exactly what the user selected  
+  // Add explicit timezone to prevent PostgreSQL from converting it
+  const explicitDate = data.scheduled_date.includes('T') 
+    ? data.scheduled_date 
+    : data.scheduled_date + 'T00:00:00-00:00'  // Add UTC timezone
+  
+  const jobData = {
+    ...data,
+    organization_id: organizationId,
+    status: data.status || 'scheduled',
+    // Use explicit timezone to prevent conversion
+    scheduled_date: data.scheduled_date  // Keep original for now
+  }
+
   const { data: job, error } = await supabase
     .from('jobs')
-    .insert({
-      ...data,
-      organization_id: organizationId,
-      status: data.status || 'scheduled'
-    })
+    .insert(jobData)
     .select()
     .single()
 

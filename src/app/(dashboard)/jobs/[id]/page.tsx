@@ -25,10 +25,33 @@ interface JobDetailPageProps {
 export default async function JobDetailPage({ params }: JobDetailPageProps) {
   const { id } = await params
 
+  // Check if id is a valid UUID format
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+  if (!uuidRegex.test(id)) {
+    notFound()
+  }
+
   try {
     const job = await getJob(id)
 
     const formatDate = (dateString: string) => {
+      // Parse date carefully to avoid timezone issues
+      const parts = dateString.split('-')
+      if (parts.length === 3) {
+        const year = parseInt(parts[0], 10)
+        const month = parseInt(parts[1], 10) - 1 // Month is 0-indexed
+        const day = parseInt(parts[2], 10)
+        const date = new Date(year, month, day)
+        
+        return date.toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        })
+      }
+      
+      // Fallback for other formats
       return new Date(dateString).toLocaleDateString('en-US', {
         weekday: 'long',
         month: 'long',

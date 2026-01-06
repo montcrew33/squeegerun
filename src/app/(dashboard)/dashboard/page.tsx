@@ -9,6 +9,7 @@ import {
   FileText,
   Plus,
   Briefcase,
+  CloudRain,
 } from 'lucide-react'
 import { getTodaysJobsCount, getWeekJobsCount } from '@/services/jobs'
 import { getCustomers } from '@/services/customers'
@@ -137,6 +138,38 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Rain Mode Quick Action - Only show if there are jobs today */}
+      {todaysJobs > 0 && (
+        <Card className="border-orange-200 bg-gradient-to-r from-orange-50 to-yellow-50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-orange-100 rounded-full">
+                  <CloudRain className="h-6 w-6 text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-orange-900">Bad weather today?</h3>
+                  <p className="text-sm text-orange-700">
+                    You have {todaysJobs} job{todaysJobs !== 1 ? 's' : ''} scheduled today.
+                    Reschedule and notify customers instantly.
+                  </p>
+                </div>
+              </div>
+              <Button 
+                asChild 
+                className="bg-orange-500 hover:bg-orange-600 text-white"
+                size="lg"
+              >
+                <Link href="/jobs/tools/rain-mode">
+                  <CloudRain className="h-4 w-4 mr-2" />
+                  Activate Rain Mode
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
