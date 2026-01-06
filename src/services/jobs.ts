@@ -5,7 +5,7 @@ type Job = Database['public']['Tables']['jobs']['Row']
 type JobInsert = Database['public']['Tables']['jobs']['Insert']
 type JobUpdate = Database['public']['Tables']['jobs']['Update']
 
-type JobWithDetails = Job & {
+export type JobWithDetails = Job & {
   customer: Database['public']['Tables']['customers']['Row']
   service_address: Database['public']['Tables']['service_addresses']['Row']
   assigned_user?: Database['public']['Tables']['profiles']['Row'] | null
@@ -170,6 +170,31 @@ export async function getJobsForWeek(startDate: string): Promise<JobWithDetails[
 
   if (error) {
     throw new Error(`Failed to fetch jobs for week: ${error.message}`)
+  }
+
+  return data || []
+}
+
+export async function getJobsForDateRange(startDate: string, endDate: string): Promise<JobWithDetails[]> {
+  const organizationId = await getUserOrganizationId()
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .select(`
+      *,
+      customer:customers(*),
+      service_address:service_addresses(*),
+      assigned_user:profiles(*)
+    `)
+    .eq('organization_id', organizationId)
+    .gte('scheduled_date', startDate)
+    .lte('scheduled_date', endDate)
+    .order('scheduled_date', { ascending: true })
+    .order('scheduled_time_start', { ascending: true, nullsFirst: false })
+
+  if (error) {
+    throw new Error(`Failed to fetch jobs for date range: ${error.message}`)
   }
 
   return data || []

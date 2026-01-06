@@ -110,6 +110,12 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
           </p>
         </div>
         <div className="flex gap-3">
+          <Button asChild variant="outline">
+            <Link href="/jobs/calendar">
+              <Calendar className="h-4 w-4 mr-2" />
+              Calendar View
+            </Link>
+          </Button>
           <Button 
             asChild 
             variant="outline"
