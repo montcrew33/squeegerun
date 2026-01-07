@@ -2,11 +2,25 @@
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import { createCustomer, updateCustomer, deleteCustomer } from "@/services/customers"
+import { createCustomer, updateCustomer, deleteCustomer, getCustomers } from "@/services/customers"
 import { createServiceAddress } from "@/services/service-addresses"
 import { customerFormSchema, type CustomerFormData } from "@/lib/validations/customer"
 import { serviceAddressSchema } from "@/lib/validations/service-address"
 import { z } from "zod"
+
+export async function getCustomersAction() {
+  try {
+    const customers = await getCustomers()
+    return { success: true, customers }
+  } catch (error) {
+    console.error('Error fetching customers:', error)
+    return { 
+      success: false as const,
+      error: error instanceof Error ? error.message : "Failed to fetch customers",
+      customers: []
+    }
+  }
+}
 
 export async function createCustomerAction(data: CustomerFormData) {
   try {

@@ -5,6 +5,10 @@ type Customer = Database['public']['Tables']['customers']['Row']
 type CustomerInsert = Database['public']['Tables']['customers']['Insert']
 type CustomerUpdate = Database['public']['Tables']['customers']['Update']
 
+export type CustomerWithDetails = Customer & {
+  service_addresses: Database['public']['Tables']['service_addresses']['Row'][]
+}
+
 async function getUserOrganizationId(): Promise<string> {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -26,13 +30,16 @@ async function getUserOrganizationId(): Promise<string> {
   return profile.organization_id
 }
 
-export async function getCustomers(): Promise<Customer[]> {
+export async function getCustomers(): Promise<CustomerWithDetails[]> {
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('customers')
-    .select('*')
+    .select(`
+      *,
+      service_addresses (*)
+    `)
     .eq('organization_id', organizationId)
     .order('created_at', { ascending: false })
 
@@ -40,10 +47,10 @@ export async function getCustomers(): Promise<Customer[]> {
     throw new Error(`Failed to fetch customers: ${error.message}`)
   }
 
-  return data || []
+  return (data as unknown as CustomerWithDetails[]) || []
 }
 
-export async function getCustomer(id: string): Promise<Customer & { service_addresses: Database['public']['Tables']['service_addresses']['Row'][] }> {
+export async function getCustomer(id: string): Promise<CustomerWithDetails> {
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, MapPin, User, DollarSign, Edit, Trash2, FileText } from "lucide-react"
+import { ArrowLeft, Calendar, Clock, MapPin, User, DollarSign, Edit, Trash2, FileText, Receipt } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,6 +15,7 @@ import {
 import { getJob } from "@/services/jobs"
 import { JOB_STATUS_LABELS, JOB_STATUS_COLORS } from "@/lib/validations/job"
 import { JobStatusUpdater } from "@/components/job-status-updater"
+import { checkInvoiceForJobAction } from "@/lib/actions/invoices"
 
 interface JobDetailPageProps {
   params: Promise<{
@@ -32,7 +33,10 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
   }
 
   try {
-    const job = await getJob(id)
+    const [job, invoiceCheck] = await Promise.all([
+      getJob(id),
+      checkInvoiceForJobAction(id)
+    ])
 
     const formatDate = (dateString: string) => {
       // Parse date carefully to avoid timezone issues
@@ -108,6 +112,26 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
             <Badge variant={getStatusBadgeVariant(job.status)}>
               {job.status ? JOB_STATUS_LABELS[job.status as keyof typeof JOB_STATUS_LABELS] : 'Unknown'}
             </Badge>
+            
+            {/* Invoice Button */}
+            {job.status === 'completed' && invoiceCheck.success && !invoiceCheck.hasInvoice && (
+              <Button asChild>
+                <Link href={`/invoices/new?job_id=${job.id}`}>
+                  <Receipt className="h-4 w-4 mr-2" />
+                  Create Invoice
+                </Link>
+              </Button>
+            )}
+            
+            {invoiceCheck.success && invoiceCheck.hasInvoice && invoiceCheck.invoice && (
+              <Button asChild variant="outline">
+                <Link href={`/invoices/${invoiceCheck.invoice.id}`}>
+                  <Receipt className="h-4 w-4 mr-2" />
+                  View Invoice
+                </Link>
+              </Button>
+            )}
+            
             <Button asChild variant="outline">
               <Link href={`/jobs/${job.id}/edit`}>
                 <Edit className="h-4 w-4 mr-2" />
@@ -167,6 +191,17 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
                     <div className="flex items-center gap-2">
                       <DollarSign className="h-4 w-4 text-muted-foreground" />
                       <span className="font-medium">{formatPrice(job.price_cents)}</span>
+                    </div>
+                  )}
+
+                  {/* Invoice Information */}
+                  {invoiceCheck.success && invoiceCheck.hasInvoice && invoiceCheck.invoice && (
+                    <div className="flex items-center gap-2">
+                      <Receipt className="h-4 w-4 text-muted-foreground" />
+                      <span>Invoice #{invoiceCheck.invoice.invoice_number}</span>
+                      <Badge variant="secondary" className="ml-auto">
+                        {invoiceCheck.invoice.status.charAt(0).toUpperCase() + invoiceCheck.invoice.status.slice(1)}
+                      </Badge>
                     </div>
                   )}
 
