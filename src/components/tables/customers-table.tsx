@@ -138,7 +138,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
                 </div>
               </TableCell>
               <TableCell>
-                <Badge variant={getStatusBadgeVariant(customer.status)}>
+                <Badge variant={getStatusBadgeVariant(customer.status || null)}>
                   {customer.status || 'Unknown'}
                 </Badge>
               </TableCell>

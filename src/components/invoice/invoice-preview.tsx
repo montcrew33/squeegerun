@@ -54,7 +54,7 @@ export function InvoicePreview({
   const customerName = customerInfo?.name || 'Customer Name'
   const customerEmail = customerInfo?.email || 'customer@example.com'
   const customerPhone = customerInfo?.phone || 'Phone Number'
-  const serviceAddress = customerInfo?.service_addresses?.[0]
+  const serviceAddress = (customerInfo as any)?.service_addresses?.[0]
 
   // Status configuration
   const statusConfig = INVOICE_STATUS_CONFIG[status as keyof typeof INVOICE_STATUS_CONFIG]

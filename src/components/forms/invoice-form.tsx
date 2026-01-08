@@ -63,7 +63,7 @@ export function InvoiceForm({ customers, jobId, invoice, isEditing = false }: In
   const [isPending, startTransition] = useTransition()
   const [isCalculating, setIsCalculating] = useState(false)
 
-  const form = useForm<InvoiceFormData>({
+  const form = useForm({
     resolver: zodResolver(invoiceSchema),
     defaultValues: {
       customer_id: invoice?.customer_id || '',
@@ -157,12 +157,12 @@ export function InvoiceForm({ customers, jobId, invoice, isEditing = false }: In
       updatedItems[index] = {
         ...updatedItems[index],
         [field]: dollarsToCents(value)
-      }
+      } as LineItemFormData
     } else {
       updatedItems[index] = {
         ...updatedItems[index],
         [field]: value
-      }
+      } as LineItemFormData
     }
     
     setValue('line_items', updatedItems)

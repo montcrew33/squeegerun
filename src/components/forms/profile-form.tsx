@@ -75,7 +75,7 @@ export function ProfileForm({ profile, userEmail }: ProfileFormProps) {
       if (result.success) {
         setProfileMessage({ type: 'success', message: 'Profile updated successfully!' })
       } else {
-        setProfileMessage({ type: 'error', message: result.error })
+        setProfileMessage({ type: 'error', message: result.error || 'Failed to update profile' })
       }
 
       // Clear message after 5 seconds
@@ -91,7 +91,7 @@ export function ProfileForm({ profile, userEmail }: ProfileFormProps) {
         setPasswordMessage({ type: 'success', message: 'Password changed successfully!' })
         passwordForm.reset()
       } else {
-        setPasswordMessage({ type: 'error', message: result.error })
+        setPasswordMessage({ type: 'error', message: result.error || 'Failed to change password' })
       }
 
       // Clear message after 5 seconds
