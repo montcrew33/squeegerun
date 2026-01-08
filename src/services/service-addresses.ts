@@ -19,11 +19,11 @@ async function getUserOrganizationId(): Promise<string> {
     .eq('id', user.id)
     .single()
 
-  if (!profile?.organization_id) {
+  if (!(profile as any)?.organization_id) {
     throw new Error('User profile not found or missing organization')
   }
 
-  return profile.organization_id
+  return (profile as any).organization_id
 }
 
 export async function getServiceAddresses(customerId: string): Promise<ServiceAddress[]> {
@@ -88,16 +88,16 @@ export async function createServiceAddress(data: Omit<ServiceAddressInsert, 'org
 
   // If this is being set as primary, unset any existing primary address for this customer
   if (data.is_primary) {
-    await supabase
-      .from('service_addresses')
+    await (supabase
+      .from('service_addresses') as any)
       .update({ is_primary: false })
       .eq('customer_id', data.customer_id)
       .eq('organization_id', organizationId)
       .eq('is_primary', true)
   }
 
-  const { data: serviceAddress, error } = await supabase
-    .from('service_addresses')
+  const { data: serviceAddress, error } = await (supabase
+    .from('service_addresses') as any)
     .insert({
       ...data,
       organization_id: organizationId
@@ -121,8 +121,8 @@ export async function updateServiceAddress(id: string, data: Omit<ServiceAddress
 
   // If this is being set as primary, unset any existing primary address for this customer
   if (data.is_primary) {
-    await supabase
-      .from('service_addresses')
+    await (supabase
+      .from('service_addresses') as any)
       .update({ is_primary: false })
       .eq('customer_id', currentAddress.customer_id)
       .eq('organization_id', organizationId)
@@ -130,8 +130,8 @@ export async function updateServiceAddress(id: string, data: Omit<ServiceAddress
       .neq('id', id) // Don't unset the current address if it's already primary
   }
 
-  const { data: serviceAddress, error } = await supabase
-    .from('service_addresses')
+  const { data: serviceAddress, error } = await (supabase
+    .from('service_addresses') as any)
     .update({
       ...data,
       updated_at: new Date().toISOString()

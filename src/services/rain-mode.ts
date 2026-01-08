@@ -108,8 +108,8 @@ export async function bulkRescheduleJobs(
   try {
     // Start a transaction by doing all updates in sequence
     // First, update all job dates
-    const { data: updatedJobs, error: updateError } = await supabase
-      .from('jobs')
+    const { data: updatedJobs, error: updateError } = await (supabase
+      .from('jobs') as any)
       .update({ 
         scheduled_date: newDate.includes('-') ? newDate : format(new Date(newDate), 'yyyy-MM-dd'),
         updated_at: new Date().toISOString()
@@ -152,7 +152,7 @@ export async function bulkRescheduleJobs(
 
     // If notifications are requested, create them
     if (notifyCustomers && message && updatedJobs) {
-      const notifications = updatedJobs.map(job => ({
+      const notifications = updatedJobs.map((job: any) => ({
         customer_id: job.customer_id,
         job_id: job.id,
         type: 'rain_delay' as const,

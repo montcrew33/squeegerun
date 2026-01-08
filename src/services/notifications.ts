@@ -81,8 +81,8 @@ export async function bulkCreateNotifications(
     }))
 
     try {
-      const { error } = await supabase
-        .from('notifications')
+      const { error } = await (supabase
+        .from('notifications') as any)
         .insert(insertData)
 
       if (error) {
@@ -128,8 +128,8 @@ export async function markNotificationSent(
 ): Promise<void> {
   const supabase = await createClient()
 
-  const { error } = await supabase
-    .from('notifications')
+  const { error } = await (supabase
+    .from('notifications') as any)
     .update({
       status: 'sent',
       sent_at: sentAt || new Date().toISOString(),
@@ -148,8 +148,8 @@ export async function markNotificationFailed(
 ): Promise<void> {
   const supabase = await createClient()
 
-  const { error } = await supabase
-    .from('notifications')
+  const { error } = await (supabase
+    .from('notifications') as any)
     .update({
       status: 'failed',
       error_message: errorMessage,
@@ -188,8 +188,8 @@ export async function getCustomerNotifications(
 export async function cancelNotification(id: string): Promise<void> {
   const supabase = await createClient()
 
-  const { error } = await supabase
-    .from('notifications')
+  const { error } = await (supabase
+    .from('notifications') as any)
     .update({ status: 'cancelled' })
     .eq('id', id)
     .eq('status', 'pending') // Only cancel pending notifications

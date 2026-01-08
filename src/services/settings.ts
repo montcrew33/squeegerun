@@ -74,8 +74,8 @@ export async function updateProfile(userId: string, data: Partial<ProfileUpdate>
     updated_at: new Date().toISOString()
   }
 
-  const { data: profile, error } = await supabase
-    .from('profiles')
+  const { data: profile, error } = await (supabase
+    .from('profiles') as any)
     .update(updateData)
     .eq('id', userId)
     .select()
@@ -105,8 +105,8 @@ export async function getOrganization(orgId: string): Promise<OrganizationWithSe
   }
 
   return {
-    ...organization,
-    settings: (organization.settings as BusinessSettings) || {}
+    ...(organization as any),
+    settings: ((organization as any).settings as BusinessSettings) || {}
   }
 }
 
@@ -123,8 +123,8 @@ export async function updateOrganization(orgId: string, data: Partial<Organizati
     updated_at: new Date().toISOString()
   }
 
-  const { data: organization, error } = await supabase
-    .from('organizations')
+  const { data: organization, error } = await (supabase
+    .from('organizations') as any)
     .update(updateData)
     .eq('id', orgId)
     .select()
