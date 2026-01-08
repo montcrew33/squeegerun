@@ -161,8 +161,8 @@ export async function createInvoice(data: CreateInvoiceData): Promise<Invoice> {
     updated_at: new Date().toISOString()
   }
 
-  const { data: invoice, error: invoiceError } = await supabase
-    .from('invoices')
+  const { data: invoice, error: invoiceError } = await (supabase
+    .from('invoices') as any)
     .insert(invoiceData)
     .select()
     .single()
@@ -181,8 +181,8 @@ export async function createInvoice(data: CreateInvoiceData): Promise<Invoice> {
     total_cents: item.total_cents
   }))
 
-  const { error: lineItemsError } = await supabase
-    .from('invoice_line_items')
+  const { error: lineItemsError } = await (supabase
+    .from('invoice_line_items') as any)
     .insert(lineItemsData)
 
   if (lineItemsError) {
@@ -227,8 +227,8 @@ export async function createInvoiceFromJob(jobId: string): Promise<Invoice> {
   const tax_cents = Math.round(subtotal_cents * tax_rate)
   const total_cents = subtotal_cents + tax_cents
 
-  const issuedDate = new Date().toISOString().split('T')[0]
-  const dueDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 14 days
+  const issuedDate = new Date().toISOString().split('T')[0] || ''
+  const dueDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || ''
 
   return createInvoice({
     customer_id: job.customer_id,
@@ -264,8 +264,8 @@ export async function updateInvoice(id: string, data: Partial<CreateInvoiceData>
   if (data.due_date) updateData.due_date = data.due_date
   if (data.notes !== undefined) updateData.notes = data.notes
 
-  const { data: invoice, error: invoiceError } = await supabase
-    .from('invoices')
+  const { data: invoice, error: invoiceError } = await (supabase
+    .from('invoices') as any)
     .update(updateData)
     .eq('id', id)
     .eq('organization_id', organizationId)
@@ -294,8 +294,8 @@ export async function updateInvoice(id: string, data: Partial<CreateInvoiceData>
       total_cents: item.total_cents
     }))
 
-    const { error: lineItemsError } = await supabase
-      .from('invoice_line_items')
+    const { error: lineItemsError } = await (supabase
+      .from('invoice_line_items') as any)
       .insert(lineItemsData)
 
     if (lineItemsError) {
@@ -311,8 +311,8 @@ export async function updateInvoiceStatus(id: string, status: InvoiceStatus): Pr
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
-  const { data: invoice, error } = await supabase
-    .from('invoices')
+  const { data: invoice, error } = await (supabase
+    .from('invoices') as any)
     .update({
       status,
       updated_at: new Date().toISOString()
