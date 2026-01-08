@@ -71,7 +71,7 @@ export function BusinessForm({ organization }: BusinessFormProps) {
       if (result.success) {
         setMessage({ type: 'success', message: 'Business settings updated successfully!' })
       } else {
-        setMessage({ type: 'error', message: result.error })
+        setMessage({ type: 'error', message: result.error || 'Failed to update business settings' })
       }
 
       // Clear message after 5 seconds
