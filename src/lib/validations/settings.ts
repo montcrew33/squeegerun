@@ -31,11 +31,13 @@ export const businessSchema = z.object({
   tax_rate: z.number()
     .min(0, 'Tax rate cannot be negative')
     .max(100, 'Tax rate cannot exceed 100%')
+    .optional()
     .default(0),
   invoice_due_days: z.number()
     .int('Invoice due days must be a whole number')
     .min(1, 'Invoice due days must be at least 1')
     .max(365, 'Invoice due days cannot exceed 365')
+    .optional()
     .default(14),
   invoice_notes_template: z.string().optional().nullable()
 })
