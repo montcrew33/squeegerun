@@ -33,7 +33,7 @@ export function JobBlock({ job, size = 'medium', className }: JobBlockProps) {
   const formatTime = (timeString?: string | null) => {
     if (!timeString) return null
     const [hours, minutes] = timeString.split(':')
-    const hour = parseInt(hours)
+    const hour = parseInt(hours || '0')
     const ampm = hour >= 12 ? 'PM' : 'AM'
     const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour
     return `${displayHour}:${minutes} ${ampm}`
