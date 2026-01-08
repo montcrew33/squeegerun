@@ -127,11 +127,11 @@ async function InvoiceDetail({ id }: { id: string }) {
                     <p className="font-medium">{invoice.customer.name}</p>
                     <p className="text-gray-600">{invoice.customer.email}</p>
                     <p className="text-gray-600">{invoice.customer.phone}</p>
-                    {invoice.customer.service_addresses?.[0] && (
+                    {(invoice.customer as any).service_addresses?.[0] && (
                       <div className="text-gray-600">
-                        <p>{invoice.customer.service_addresses[0].street_address}</p>
+                        <p>{(invoice.customer as any).service_addresses[0].street_address}</p>
                         <p>
-                          {invoice.customer.service_addresses[0].city}, {invoice.customer.service_addresses[0].state} {invoice.customer.service_addresses[0].zip_code}
+                          {(invoice.customer as any).service_addresses[0].city}, {(invoice.customer as any).service_addresses[0].state} {(invoice.customer as any).service_addresses[0].zip_code}
                         </p>
                       </div>
                     )}
