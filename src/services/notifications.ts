@@ -30,8 +30,8 @@ export async function createNotification(data: CreateNotificationData): Promise<
   const supabase = await createClient()
   const organizationId = await getUserOrganizationId()
 
-  const { data: notification, error } = await supabase
-    .from('notifications')
+  const { data: notification, error } = await (supabase
+    .from('notifications') as any)
     .insert({
       organization_id: organizationId,
       customer_id: data.customer_id,

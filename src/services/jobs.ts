@@ -218,8 +218,8 @@ export async function createJob(data: Omit<JobInsert, 'organization_id'>): Promi
     scheduled_date: data.scheduled_date  // Keep original for now
   }
 
-  const { data: job, error } = await supabase
-    .from('jobs')
+  const { data: job, error } = await (supabase
+    .from('jobs') as any)
     .insert(jobData)
     .select()
     .single()
@@ -231,8 +231,8 @@ export async function createJob(data: Omit<JobInsert, 'organization_id'>): Promi
   // Log initial status to history
   if (job) {
     const userId = await getCurrentUserId()
-    await supabase
-      .from('job_status_history')
+    await (supabase
+      .from('job_status_history') as any)
       .insert({
         job_id: job.id,
         new_status: job.status || 'scheduled',
@@ -249,8 +249,8 @@ export async function updateJob(id: string, data: Omit<JobUpdate, 'organization_
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
-  const { data: job, error } = await supabase
-    .from('jobs')
+  const { data: job, error } = await (supabase
+    .from('jobs') as any)
     .update({
       ...data,
       updated_at: new Date().toISOString()
@@ -285,8 +285,8 @@ export async function updateJobStatus(id: string, status: string, notes?: string
   }
 
   // Update job status
-  const { data: job, error } = await supabase
-    .from('jobs')
+  const { data: job, error } = await (supabase
+    .from('jobs') as any)
     .update({
       status,
       updated_at: new Date().toISOString()
@@ -302,12 +302,12 @@ export async function updateJobStatus(id: string, status: string, notes?: string
 
   // Log status change to history
   if (job) {
-    await supabase
-      .from('job_status_history')
+    await (supabase
+      .from('job_status_history') as any)
       .insert({
         job_id: job.id,
         new_status: status,
-        previous_status: currentJob.status,
+        previous_status: (currentJob as any).status,
         changed_by: userId,
         notes: notes || null
       })
