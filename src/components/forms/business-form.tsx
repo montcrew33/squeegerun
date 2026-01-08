@@ -59,7 +59,7 @@ export function BusinessForm({ organization }: BusinessFormProps) {
     }
   }
 
-  const form = useForm<BusinessFormData>({
+  const form = useForm({
     resolver: zodResolver(businessSchema),
     defaultValues: getDefaultValues()
   })
