@@ -201,7 +201,7 @@ export function getDefaultDueDate(issuedDate?: string): string {
   const issued = issuedDate ? new Date(issuedDate) : new Date()
   const due = new Date(issued)
   due.setDate(due.getDate() + 14) // 14 days default
-  return due.toISOString().split('T')[0]
+  return due.toISOString().split('T')[0] || ''
 }
 
 export function isOverdue(dueDate: string, status: string): boolean {

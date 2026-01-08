@@ -23,11 +23,11 @@ async function getUserOrganizationId(): Promise<string> {
     .eq('id', user.id)
     .single()
 
-  if (!profile?.organization_id) {
+  if (!(profile as any)?.organization_id) {
     throw new Error('User profile not found or missing organization')
   }
 
-  return profile.organization_id
+  return (profile as any).organization_id
 }
 
 export async function getCustomers(): Promise<CustomerWithDetails[]> {
@@ -77,7 +77,7 @@ export async function getCustomer(id: string): Promise<CustomerWithDetails> {
   }
 
   return {
-    ...customer,
+    ...(customer as any),
     service_addresses: serviceAddresses || []
   }
 }
@@ -86,8 +86,8 @@ export async function createCustomer(data: Omit<CustomerInsert, 'organization_id
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
-  const { data: customer, error } = await supabase
-    .from('customers')
+  const { data: customer, error } = await (supabase
+    .from('customers') as any)
     .insert({
       ...data,
       organization_id: organizationId
@@ -106,8 +106,8 @@ export async function updateCustomer(id: string, data: Omit<CustomerUpdate, 'org
   const organizationId = await getUserOrganizationId()
   const supabase = await createClient()
 
-  const { data: customer, error } = await supabase
-    .from('customers')
+  const { data: customer, error } = await (supabase
+    .from('customers') as any)
     .update({
       ...data,
       updated_at: new Date().toISOString()

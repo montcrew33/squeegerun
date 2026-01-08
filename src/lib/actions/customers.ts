@@ -26,11 +26,11 @@ export async function createCustomerAction(data: CustomerFormData) {
   try {
     const customer = await createCustomer({
       name: data.name,
-      email: data.email || null,
-      phone: data.phone || null,
+      email: data.email || undefined,
+      phone: data.phone || undefined,
       status: data.status,
-      source: data.source || null,
-      notes: data.notes || null,
+      source: data.source || undefined,
+      notes: data.notes || undefined,
     })
 
     revalidatePath("/customers")
@@ -48,11 +48,11 @@ export async function updateCustomerAction(id: string, data: CustomerFormData) {
   try {
     const customer = await updateCustomer(id, {
       name: data.name,
-      email: data.email || null,
-      phone: data.phone || null,
+      email: data.email || undefined,
+      phone: data.phone || undefined,
       status: data.status,
-      source: data.source || null,
-      notes: data.notes || null,
+      source: data.source || undefined,
+      notes: data.notes || undefined,
     })
 
     revalidatePath("/customers")
@@ -155,11 +155,11 @@ export async function importCustomersAction(
       // Create customer
       const customer = await createCustomer({
         name: validatedData.name,
-        email: validatedData.email || null,
-        phone: validatedData.phone || null,
+        email: validatedData.email || undefined,
+        phone: validatedData.phone || undefined,
         status: validatedData.status,
-        source: validatedData.source || null,
-        notes: validatedData.notes || null,
+        source: validatedData.source || undefined,
+        notes: validatedData.notes || undefined,
       })
 
       // Create service address if address fields are present
