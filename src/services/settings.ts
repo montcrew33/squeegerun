@@ -148,8 +148,8 @@ export async function updateOrganizationSettings(orgId: string, settings: Busine
     ...settings
   }
 
-  const { data: organization, error } = await supabase
-    .from('organizations')
+  const { data: organization, error } = await (supabase
+    .from('organizations') as any)
     .update({
       settings: mergedSettings,
       updated_at: new Date().toISOString()
@@ -176,7 +176,7 @@ export async function updateBusinessInfo(data: BusinessFormData): Promise<Organi
   const settings: BusinessSettings = {
     tax_rate: tax_rate / 100, // Convert percentage to decimal
     invoice_due_days,
-    invoice_notes_template
+    invoice_notes_template: invoice_notes_template || undefined
   }
 
   // Update organization basic info

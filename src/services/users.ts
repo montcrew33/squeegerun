@@ -17,11 +17,11 @@ export async function getUserOrganizationId(): Promise<string> {
     .eq('id', user.id)
     .single()
 
-  if (!profile?.organization_id) {
+  if (!(profile as any)?.organization_id) {
     throw new Error('User profile not found or missing organization')
   }
 
-  return profile.organization_id
+  return (profile as any).organization_id
 }
 
 export async function getUsers(): Promise<User[]> {
