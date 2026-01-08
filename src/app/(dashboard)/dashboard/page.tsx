@@ -65,8 +65,8 @@ export default async function DashboardPage() {
             Welcome to SqueegeeRun
           </h1>
           <p className="text-gray-600">
-            {profile?.full_name && `Hello, ${profile.full_name}! `}
-            {profile?.organizations?.name && `Managing ${profile.organizations.name}.`}
+            {profile && (profile as any).full_name && `Hello, ${(profile as any).full_name}! `}
+            {profile && (profile as any).organizations?.name && `Managing ${(profile as any).organizations.name}.`}
           </p>
         </div>
 

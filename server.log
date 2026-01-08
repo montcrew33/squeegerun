@@ -1,0 +1,33 @@
+
+> squeegeerun@0.1.0 dev
+> next dev
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/jonathandoran/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/jonathandoran/Desktop/SqueegeRun/squeegeerun/package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.151:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 70.9s
+ GET / 307 in 2.8s (compile: 1813ms, proxy.ts: 817ms, render: 129ms)
+ GET /login 200 in 2.4s (compile: 2.1s, proxy.ts: 129ms, render: 134ms)
+ GET /dashboard 200 in 3.0s (compile: 1105ms, proxy.ts: 382ms, render: 1469ms)
+ GET /dashboard 200 in 1366ms (compile: 2ms, proxy.ts: 237ms, render: 1127ms)
+○ Compiling /jobs ...
+ GET /jobs 200 in 5.5s (compile: 4.2s, proxy.ts: 558ms, render: 779ms)
+ GET /jobs/calendar 200 in 1087ms (compile: 859ms, proxy.ts: 198ms, render: 30ms)
+ POST /jobs/calendar 200 in 653ms (compile: 1633µs, proxy.ts: 149ms, render: 503ms)
+ POST /jobs/calendar 200 in 575ms (compile: 4ms, proxy.ts: 155ms, render: 416ms)
+ GET /schedules 200 in 950ms (compile: 603ms, proxy.ts: 210ms, render: 137ms)
+ GET /dashboard 200 in 2.9s (compile: 120ms, proxy.ts: 1061ms, render: 1725ms)
+ GET /invoices 404 in 2.5s (compile: 2.2s, proxy.ts: 192ms, render: 41ms)
+ GET /invoices 404 in 255ms (compile: 4ms, proxy.ts: 216ms, render: 35ms)
+[?25h
