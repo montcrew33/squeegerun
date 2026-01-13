@@ -2,6 +2,9 @@ import { notFound } from "next/navigation"
 import { getCustomer } from "@/services/customers"
 import { EditCustomerForm } from "./edit-customer-form"
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 interface EditCustomerPageProps {
   params: Promise<{ id: string }>
 }

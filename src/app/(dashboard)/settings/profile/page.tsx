@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { ArrowLeft, User } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
 import {
   Card,
   CardContent,

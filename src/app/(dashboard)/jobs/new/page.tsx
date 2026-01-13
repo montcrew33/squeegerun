@@ -7,6 +7,9 @@ import { getAllServiceAddresses } from "@/services/service-addresses"
 import { getUsers } from "@/services/users"
 import { NewJobForm } from "@/components/new-job-form"
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 interface Customer {
   id: string
   name: string

@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button'
 import { getCustomers } from '@/services/customers'
 import { InvoiceForm } from '@/components/forms/invoice-form'
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 export default async function NewInvoicePage({
   searchParams
 }: {
