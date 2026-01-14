@@ -1,0 +1,29 @@
+
+> squeegeerun@0.1.0 dev
+> next dev
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/jonathandoran/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/jonathandoran/Desktop/SqueegeRun/squeegeerun/package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.151:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 151.2s
+ GET / 307 in 983ms (compile: 862ms, render: 121ms)
+○ Compiling /jobs ...
+ GET /jobs 200 in 8.2s (compile: 4.2s, proxy.ts: 1558ms, render: 2.4s)
+○ Compiling /jobs/calendar ...
+ GET /jobs/calendar 200 in 6.1s (compile: 4.9s, proxy.ts: 1077ms, render: 163ms)
+ POST /jobs/calendar 200 in 1381ms (compile: 6ms, proxy.ts: 319ms, render: 1056ms)
+ POST /jobs/calendar 200 in 638ms (compile: 3ms, proxy.ts: 140ms, render: 495ms)
+ POST /jobs/calendar 200 in 775ms (compile: 5ms, proxy.ts: 206ms, render: 565ms)
+ POST /jobs/calendar 200 in 587ms (compile: 5ms, proxy.ts: 144ms, render: 439ms)
+ GET /dashboard 200 in 1291ms (compile: 72ms, proxy.ts: 219ms, render: 1001ms)
