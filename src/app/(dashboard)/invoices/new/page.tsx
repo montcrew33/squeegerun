@@ -32,6 +32,9 @@ export default function NewInvoicePage({
     const newLineItems = [...lineItems]
     const currentItem = newLineItems[index]
     
+    // Safety check
+    if (!currentItem) return
+    
     // Update the specific field
     if (field === 'description') {
       currentItem.description = String(value)
