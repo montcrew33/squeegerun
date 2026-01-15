@@ -30,11 +30,22 @@ export default function NewInvoicePage({
 
   const updateLineItem = (index: number, field: keyof LineItem, value: string | number) => {
     const newLineItems = [...lineItems]
-    newLineItems[index] = { ...newLineItems[index], [field]: value }
+    const currentItem = newLineItems[index]
+    
+    // Update the specific field
+    if (field === 'description') {
+      currentItem.description = String(value)
+    } else if (field === 'quantity') {
+      currentItem.quantity = Number(value)
+    } else if (field === 'rate') {
+      currentItem.rate = Number(value)
+    } else if (field === 'amount') {
+      currentItem.amount = Number(value)
+    }
     
     // Recalculate amount when quantity or rate changes
     if (field === 'quantity' || field === 'rate') {
-      newLineItems[index].amount = newLineItems[index].quantity * newLineItems[index].rate
+      currentItem.amount = currentItem.quantity * currentItem.rate
     }
     
     setLineItems(newLineItems)
